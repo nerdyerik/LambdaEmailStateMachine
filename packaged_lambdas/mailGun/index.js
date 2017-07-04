@@ -9,7 +9,7 @@ exports.handler = (event, context, callback) => {
   		url: 'https://api.mailgun.net/v3/axiom88.com/messages',
   		headers: {	 
      		'cache-control': 'no-cache',
-     		authorization: 'Basic YXBpOmtleS1hZjFmZWJmODQyNTI0NWFjNWQyNzgwZWYzYWVmMTBlYg==',
+     		authorization: 'XXXXXX YOUR AUTHORIZATION HERE XXXXXX',
      		'content-type': 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW' 
   		},
   		formData: { 
