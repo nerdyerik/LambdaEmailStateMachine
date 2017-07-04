@@ -8,7 +8,7 @@ exports.handler = (event, context, callback) => {
 		method: 'POST',
    	 	url: 'https://api.sendgrid.com/v3/mail/send',
     	headers: {
-    		'Authorization': 'Bearer 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',
+    		'Authorization': 'XXXXXXXXXXXYOUR AUTH HEREXXXXXXX',
     		'Content-Type': 'application/json'
 		},
 		body: '{"personalizations": [{"to": [{"email": "' + event.to + '"}]}],"from": {"email": "' + event.from + '"},"subject": "' + event.subject + '","content": [{"type": "text/plain", "value": "' + event.strippedBody + '"}]}'
