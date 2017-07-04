@@ -1,0 +1,61 @@
+{
+  "Comment": "Bright Wheel Email Process State Machine",
+  "StartAt": "VerifyEmail",
+  "States": {
+    "VerifyEmail": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:us-east-1:563561789328:function:verifyEmail",
+      "Next": "StripBody",
+      "Catch": [
+        {
+          "ErrorEquals": ["States.ALL"],
+          "Next": "CatchAllFallback"
+        }
+      ]
+    },
+    "StripBody": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:us-east-1:563561789328:function:stripBody",
+      "Next": "CheckPlatform",
+      "Catch": [
+        {
+          "ErrorEquals": ["States.ALL"],
+          "Next": "CatchAllFallback"
+        }
+      ]
+    },
+    "CheckPlatform": {
+      "Type" : "Choice",
+      "Choices": [
+        {
+          "Variable": "$.emailapi",
+          "NumericEquals": 1,
+          "Next": "SendGrid"
+        },
+        {
+          "Variable": "$.emailapi",
+          "NumericEquals": 2,
+          "Next": "MailGun"
+        }
+      ]
+    },
+	
+    "CatchAllFallback": {
+      "Type": "Pass",
+      "Result": "This is a fallback from a reserved error code",
+      "End": true
+    },
+    
+    "SendGrid": {
+      "Type" : "Task",
+      "Resource": "arn:aws:lambda:us-east-1:563561789328:function:sendGrid",
+      "End": true
+    },
+
+    "MailGun": {
+      "Type" : "Task",
+      "Resource": "arn:aws:lambda:us-east-1:563561789328:function:mailGun",
+      "End": true
+    }
+  }
+}
