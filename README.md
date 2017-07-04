@@ -37,6 +37,7 @@ those two lambdas to include the library and its requirements.
 2) The ASL JSON defines the state machine for AWS Step Functions:
 It does Email verification erroring out if failed to verify, then
 strips the html and saves a stripped body, and then checks which service to
-use to send mail, this would be sent in with the email json. 
-
-
+use to send mail, this would be sent in with the input. This could be modeled
+in a different manner, or quickly changed to look at a configuration file somewhere on
+the server, but does not require any reboot or server redeploy. We could also 
+add some state machine logic to automatically fail over to another email service.
